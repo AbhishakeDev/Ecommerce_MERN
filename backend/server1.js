@@ -16,22 +16,8 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const corsOpts = {
-    origin: '*',
-
-    methods: [
-        'GET',
-        'POST',
-        'PUT',
-        'DELETE'
-    ],
-
-    allowedHeaders: [
-        'Content-Type',
-    ],
-};
-
-app.use(cors(corsOpts));
+app.use(cors());
+app.options('*', cors());
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));

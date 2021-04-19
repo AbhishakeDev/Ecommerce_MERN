@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = mongoose.Schema({
     name: {
@@ -21,6 +22,21 @@ const userSchema = mongoose.Schema({
     }
 }, {
     timestamps: true
+})
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+}
+
+//this will run only when new passowrd is created or new user is created or when password is updated
+userSchema.pre('save', async function (next) {
+    //checkling if the users password has been modified if not then do not create a hash as it is already hashed
+    if (!this.isModified('password')) {
+        next();
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password, salt);
 })
 
 const User = mongoose.model('User', userSchema);

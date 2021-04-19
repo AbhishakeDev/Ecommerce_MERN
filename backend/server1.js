@@ -17,7 +17,7 @@ connectDB();
 
 const app = express();
 app.use(cors());
-app.options('*', cors());
+app.options('http://localhost:5000', cors());
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));

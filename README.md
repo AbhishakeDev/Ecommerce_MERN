@@ -1,5 +1,6 @@
 # Ecommerce_MERN ROVERCOM
 
+## Deployed version :: (https://rovercom.herokuapp.com/)[https://rovercom.herokuapp.com/]
 
 > eCommerce platform built with the MERN stack & Redux.
 
